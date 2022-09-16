@@ -1,0 +1,8 @@
+{
+	alphaDCHomeByPath(_path: "/content/dam/decd-endc/content-fragments/alpha/dev/components/home/search-for-benefits-and-services") {
+	    item {
+            _path
+            scTitleEn
+        }
+	}
+}
