@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "aem_adaptor_micro_service"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "aem_adaptor_micro_service", from = "src"}]
+
+[tool.poetry.scripts]
+start = "aem_adaptor_micro_service.main:start"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.85.0"
+uvicorn = "^0.18.3"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.1.3"
+requests = "^2.28.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
