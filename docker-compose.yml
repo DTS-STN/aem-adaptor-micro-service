@@ -1,0 +1,13 @@
+---
+
+services:
+  api:
+    container_name: api
+    image: aem_adapter:latest
+    build: .
+    ports:
+      - "8000:8000"
+    #volumes:
+    #  - ./:/app
+    #environment:
+    #  FLASK_PORT: 8000
