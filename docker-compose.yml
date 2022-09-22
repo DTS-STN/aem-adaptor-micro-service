@@ -3,7 +3,7 @@
 services:
   api:
     container_name: api
-    image: aem_adapter:latest
+    image: aem_adaptor:latest
     build: .
     ports:
       - "8000:8000"

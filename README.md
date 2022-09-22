@@ -24,10 +24,9 @@ poetry install
 install python extension, and add poetry's venv path to your vscode instance 
 ```
 "python.venvFolders": [
-  "~/.cache/pypoetry/virtualenvs",
-  "~/.cache/pypoetry"
+  ".venv"
 ]
-"python.venvPath": "~/.cache/pypoetry/virtualenvs"
+"python.venvPath": ".venv"
 ```
 
 Restart vscode, then open the command palette and find "Python: Select Interpreter" and select the one with aem-adaptor-micro-service in the title.

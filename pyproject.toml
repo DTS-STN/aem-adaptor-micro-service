@@ -1,13 +1,16 @@
 [tool.poetry]
-name = "aem_adaptor_micro_service"
+name = "app"
 version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
 readme = "README.md"
-packages = [{include = "aem_adaptor_micro_service", from = "src"}]
+packages = [
+    { include = "app" }#,
+    #{ include = "graphql", from = "lib" },
+    ]
 
 [tool.poetry.scripts]
-start = "aem_adaptor_micro_service.main:start"
+start = "app.main:start"
 
 [tool.poetry.dependencies]
 python = "^3.9"

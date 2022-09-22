@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from aem_adaptor_micro_service.main import app
+from app.main import app
 
 client = TestClient(app)
 

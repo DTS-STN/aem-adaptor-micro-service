@@ -20,7 +20,11 @@ USER $user
 ENV POETRY_VIRTUALENVS_IN_PROJECT=true
 ENV POETRY_NO_INTERACTION=1
 
-COPY . .
+COPY pyproject.toml .
+COPY --chown=$user:$group poetry.toml .
+COPY poetry.lock .
+COPY app app
+COPY README.md .
 
 RUN python3 -m pip install --user pipx && python3 -m pipx ensurepath
 
@@ -30,4 +34,5 @@ RUN pipx install poetry && poetry install --no-interaction --no-ansi --only main
 
 EXPOSE 8000
 
+#CMD ["bash"]
 CMD [ "poetry", "run", "start" ]
