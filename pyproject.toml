@@ -16,6 +16,7 @@ start = "app.main:start"
 python = "^3.9"
 fastapi = "^0.85.0"
 uvicorn = "^0.18.3"
+gql = {extras = ["requests"], version = "^3.4.0"}
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.1.3"
