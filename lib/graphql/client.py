@@ -17,5 +17,5 @@ def load_query(path):
 
 def query(path):
     query = load_query(path)
-    result = gqlclient.execute(query)
-    return(result)
+    response = gqlclient.execute(query)
+    return(response)
