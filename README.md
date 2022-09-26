@@ -63,12 +63,45 @@ AEM_GRAPHQL_ENDPOINT = "AEM's GraphQL endpoint"
 
 APP_VERSION = "dts-aem-adaptor-ms/0.0.1"
 
-## GraphQL query example
-GraphQL queries are located at ./lib/graphql/queries/[project name]
+## Creating a new query
 
+### Adding an endpoint
+Create a new route in your projects /app/router file
+
+Example
+```
+@router.get("/home")
+async def read_sch_get_home():
+    return sch_content.get_home()
+```
+
+### Adding a content function
+Create a content function in your projects /app/content file
+
+Example
+```
+def get_home():
+    aem_content = query("./lib/graphql/queries/sc-labs/home.graphql")
+    mapped_content = map_home(aem_content)
+    return mapped_content
+```
+
+### Adding a GraphQL query
+GraphQL queries are located at ./lib/graphql/queries/[project name]/[your query name]
 
 Import query from GraphQL client and provide query path as a parametert (AEM example below).
 ```
 from lib.graphql.client import query
 aem_content = query("./lib/graphql/queries/sc-labs/home.graphql")
+```
+
+### Adding a mapping
+Create a new map in your projects /app/mapper file
+
+Example
+```
+def map_home(aem_content):
+    return {
+        "title": aem_content["alphaDCHomeByPath"]["item"]["scTitleEn"]
+    }
 ```
