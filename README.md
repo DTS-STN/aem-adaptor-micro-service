@@ -60,14 +60,15 @@ poetry add -G dev libraryname
 
 ## Required environment variables
 AEM_GRAPHQL_ENDPOINT = "AEM's GraphQL endpoint"
+
 APP_VERSION = "dts-aem-adaptor-ms/0.0.1"
 
 ## GraphQL query example
-GraphQL queries are checked in under ./lib/graphql/queries/[project name]
+GraphQL queries are located at ./lib/graphql/queries/[project name]
 
-Initialize a GraphQLWrapper object providing the endpoint and user-agent header (example below).
+
+Import query from GraphQL client and provide query path as a parametert (AEM example below).
 ```
-from lib.graphql.client import GraphQLWrapper
-AEMClient = GraphQLWrapper(os.environ['AEM_GRAPHQL_ENDPOINT'], os.environ['APP_VERSION'])
-AEMClient.query("./lib/graphql/queries/sc-labs/home.graphql")
+from lib.graphql.client import query
+aem_content = query("./lib/graphql/queries/sc-labs/home.graphql")
 ```
