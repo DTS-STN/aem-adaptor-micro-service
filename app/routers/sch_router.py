@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from lib.content import sch_content
+from app.lib.content import sch_content
 
 router = APIRouter(prefix="/sch")
 

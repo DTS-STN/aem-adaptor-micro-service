@@ -11,7 +11,7 @@ def test_read_main():
 
 def test_read_sch_get_home(mocker):
     mocker.patch(
-        'lib.content.sch_content.get_home',
+        'app.lib.content.sch_content.get_home',
         return_value={'title': 'Search for benefits and services'}
     )
     response = client.get("/sch/home")
