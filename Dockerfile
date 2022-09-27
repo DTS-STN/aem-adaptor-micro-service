@@ -34,5 +34,4 @@ RUN pipx install poetry && poetry install --no-interaction --no-ansi --only main
 
 EXPOSE 8000
 
-#CMD ["bash"]
 CMD [ "poetry", "run", "start" ]

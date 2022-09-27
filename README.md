@@ -3,6 +3,9 @@ An AEM adaptor to query, map and cache AEM responses
 
 # Required Tooling
 
+## Python Version:
+The package manager we are using, poetry, requires python 3.7+
+
 ## Setup
 
 ### Install pipx:
