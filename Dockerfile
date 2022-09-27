@@ -24,6 +24,7 @@ COPY pyproject.toml .
 COPY --chown=$user:$group poetry.toml .
 COPY poetry.lock .
 COPY app app
+COPY lib lib
 COPY README.md .
 
 RUN python3 -m pip install --user pipx && python3 -m pipx ensurepath
