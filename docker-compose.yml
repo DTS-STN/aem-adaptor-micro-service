@@ -1,0 +1,13 @@
+---
+
+services:
+  api:
+    container_name: api
+    image: aem_adaptor:latest
+    build: .
+    ports:
+      - "8000:8000"
+    #volumes:
+    #  - ./:/app
+    #environment:
+    #  FASTAPI_PORT: 8080
