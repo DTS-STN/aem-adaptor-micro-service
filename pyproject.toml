@@ -5,8 +5,7 @@ description = ""
 authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 packages = [
-    { include = "app" }#,
-    #{ include = "graphql", from = "lib" },
+    { include = "app" }
     ]
 
 [tool.poetry.scripts]
@@ -22,7 +21,26 @@ gql = {extras = ["requests"], version = "^3.4.0"}
 pytest = "^7.1.3"
 requests = "^2.28.1"
 pytest-mock = "^3.8.2"
+bandit = "^1.7.4"
+mypy = "^0.981"
+black = "^22.8.0"
+isort = "^5.10.1"
+autotyping = "^22.9.0"
+pytest-cov = "^3.0.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+known_third_party = ["fastapi", "pydantic", "starlette"]
+
+[tool.mypy]
+strict = true
+
+[tool.pytest.ini_options]
+addopts = [
+  "--strict-config",
+  "--strict-markers",
+]
