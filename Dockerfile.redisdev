@@ -1,0 +1,39 @@
+FROM redis:7-bullseye
+
+#Build ARGs/ENVs
+ARG DEFAULT_USER
+ENV DEFAULT_USER=$DEFAULT_USER
+ARG DEFAULT_PASSWORD
+ENV DEFAULT_PASSWORD=$DEFAULT_PASSWORD
+ARG DEFAULT_USER_PERMISSIONS
+ENV DEFAULT_USER_PERMISSIONS=$DEFAULT_USER_PERMISSIONS
+ARG REDIS_USER
+ENV REDIS_USER=$REDIS_USER
+ARG REDIS_PASSWORD
+ENV REDIS_PASSWORD=$REDIS_PASSWORD
+ARG REDIS_USER_PERMISSIONS
+ENV REDIS_USER_PERMISSIONS=$REDIS_USER_PERMISSIONS
+
+COPY redis.conf /usr/local/etc/redis/redis-template.conf
+
+RUN \
+    apt update && \
+    apt install gettext-base && \
+    envsubst < /usr/local/etc/redis/redis-template.conf > /usr/local/etc/redis/redis.conf && \
+    apt-get remove --purge --auto-remove -y && \
+    rm -rf /var/lib/apt/lists/*
+
+ARG user=habetrot
+ARG home=/home/$user
+ARG group=habetrot
+RUN addgroup $group
+RUN adduser \
+    --disabled-password \
+    --gecos "" \
+    --home $home \
+    --ingroup $group \
+    $user
+
+USER $user
+
+CMD [ "redis-server", "/usr/local/etc/redis/redis.conf" ]

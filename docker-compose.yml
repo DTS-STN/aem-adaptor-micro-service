@@ -18,7 +18,17 @@ services:
       - "redis"
   redis:
     container_name: redis
-    image: redis:7-bullseye
+    build: 
+      context: .
+      args:
+        REDIS_USER: redis_user
+        REDIS_PASSWORD: vKJFYqEuXAr9pE5crojtQsUpausnKpAf
+        REDIS_USER_PERMISSIONS: +@all allkeys allchannels
+        DEFAULT_USER: default
+        DEFAULT_PASSWORD: LhoMSE3UkrfE7rs7NuufQebj3CaTaJ4i
+        DEFAULT_USER_PERMISSIONS: +@all allkeys allchannels
+      dockerfile: Dockerfile.redisdev
+    image: redisdev:latest
     ports:
       - "6379:6379"
     expose:

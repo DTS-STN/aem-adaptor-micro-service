@@ -17,7 +17,6 @@ WORKDIR /app
 
 USER $user
 
-ENV POETRY_VIRTUALENVS_IN_PROJECT=true
 ENV POETRY_NO_INTERACTION=1
 
 COPY pyproject.toml .
@@ -26,7 +25,9 @@ COPY poetry.lock .
 COPY app app
 COPY README.md .
 
-RUN python3 -m pip install --user pipx && python3 -m pipx ensurepath
+RUN \
+    python3 -m pip install --user pipx && \
+    python3 -m pipx ensurepath
 
 ENV PATH /home/habetrot/.local/bin:$PATH
  

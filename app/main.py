@@ -19,16 +19,16 @@ async def handle_cache(request: Request, call_next: Any) -> Union[Any, None]:
     path = request.url.path.replace("/", "_")
 
     # establish redis connection
-    r = redis.Redis(
-        host=os.getenv("REDIS_HOST"),
-        port=os.getenv("REDIS_PORT"),
-        db=os.getenv("REDIS_DB"),
-        username=os.getenv("REDIS_USERNAME"),
+    r = redis.StrictRedis(
+        host=os.getenv("REDIS_HOST", "localhost"),
+        port=int(os.getenv("REDIS_PORT", "6379")),
+        db=int(os.getenv("REDIS_DB", "0")),
+        username=os.getenv("REDIS_USER"),
         password=os.getenv("REDIS_PASSWORD"),
     )
 
     # check redis for values
-    if r.exists(path):
+    if r.exists(path) and path != "":
         # if a key is found, return the value
         return JSONResponse(json.loads(r.get(path)))
 
@@ -38,8 +38,7 @@ async def handle_cache(request: Request, call_next: Any) -> Union[Any, None]:
     if response.status_code == 200:
         response_body = [chunk async for chunk in response.body_iterator]
         response.body_iterator = iterate_in_threadpool(iter(response_body))
-        response_body2 = (b"".join(response_body)).decode()
-        json_decoded = json.loads(response_body2)
+        json_decoded = json.loads((b"".join(response_body)).decode())
 
         r.set(path, json.dumps(json_decoded))
 
