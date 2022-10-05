@@ -61,6 +61,27 @@ or
 poetry add -G dev libraryname
 ```
 
+## Starting the cache locally
+
+### Install docker-compose.
+
+You can either install docker-compose via your Operating System's package manager, or via pip.
+
+```
+pip install docker-compose
+```
+
+### Building and Starting the local cache container
+
+```
+docker-compose up -d redis
+```
+
+If you are running the application locally, ensure that the REDIS_HOST env var, in your .env file is set to 127.0.0.1.
+
+If you are running the application in a container, ensure that the REDIS_HOST env var, in your .env file is set to redis.
+
+
 ## Required environment variables
 AEM_GRAPHQL_ENDPOINT = "AEM's GraphQL endpoint"
 
