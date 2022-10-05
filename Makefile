@@ -3,7 +3,9 @@ include .env
 export $(shell sed 's/=.*//' .env)
 
 start:
-	@poetry run uvicorn app.main:app --host $(LOCAL_HOST) --port $(LOCAL_PORT) --reload
+	poetry run uvicorn app.main:app --host $(LOCAL_HOST) --port $(LOCAL_PORT) --reload
+debug:
+	poetry run uvicorn app.main:app --host $(LOCAL_HOST) --port $(LOCAL_PORT) --log-level debug --reload
 test:
 	@poetry run pytest
 autotype:
@@ -16,4 +18,4 @@ format:
 	@poetry run black app
 	@poetry run isort app
 
-.PHONY: test autotype lint sa format start
+.PHONY: test autotype lint sa format start debug
