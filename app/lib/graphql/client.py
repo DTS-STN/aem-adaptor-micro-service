@@ -1,5 +1,6 @@
 import os
-
+import graphql
+from typing import Any
 from gql import Client, gql
 from gql.transport.requests import RequestsHTTPTransport
 
@@ -13,12 +14,12 @@ transport = RequestsHTTPTransport(
 gqlclient = Client(transport=transport, fetch_schema_from_transport=True)
 
 
-def load_query(path):
+def load_query(path: str) -> Any:
     with open(path) as f:
         return gql(f.read())
 
 
-def query(path):
+def query(path: str) -> Any:
     query = load_query(path)
     response = gqlclient.execute(query)
     return response
