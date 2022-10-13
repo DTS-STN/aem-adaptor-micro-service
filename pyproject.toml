@@ -17,6 +17,7 @@ fastapi = "^0.85.0"
 uvicorn = "^0.18.3"
 gql = {extras = ["requests"], version = "^3.4.0"}
 redis = "^4.3.4"
+pydantic = "^1.10.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.1.3"

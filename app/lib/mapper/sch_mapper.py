@@ -1,9 +1,9 @@
 from typing import Any
+from pydantic import BaseModel
 
-class HomeContent():
+class HomeContent(BaseModel):
     title: str
 
 def map_home(aem_content: Any) -> HomeContent:
-    homeContent = HomeContent()
-    homeContent.title = aem_content["alphaDCHomeByPath"]["item"]["scTitleEn"]
+    homeContent = HomeContent(**{"title": aem_content["alphaDCHomeByPath"]["item"]["scTitleEn"]})
     return homeContent
