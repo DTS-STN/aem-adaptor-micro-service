@@ -5,6 +5,7 @@ from app.lib.mapper.sch_mapper import HomeContent
 
 router = APIRouter(prefix="/sch")
 
+
 @router.get("/home")
 async def read_sch_get_home() -> HomeContent:
     return get_home()
