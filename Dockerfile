@@ -20,10 +20,10 @@ ARG REDIS_USER
 ENV REDIS_USER=${REDIS_USER}
 ARG REDIS_PASSWORD
 ENV REDIS_PASSWORD=${REDIS_PASSWORD}
-
 ARG user=habetrot
 ARG home=/home/$user
 ARG group=habetrot
+
 RUN addgroup $group && \
     adduser \
     --disabled-password \
