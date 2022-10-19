@@ -1,17 +1,38 @@
 FROM python:3.9-slim-bullseye
 
+ARG APP_HOST=0.0.0.0
+ENV APP_HOST=${APP_HOST}
+ARG APP_PORT=8000
+ENV APP_PORT=${APP_PORT}
+ARG APP_RELOAD=True
+ENV APP_RELOAD=${APP_RELOAD}
+ARG AEM_GRAPHQL_ENDPOINT
+ENV AEM_GRAPHQL_ENDPOINT=${AEM_GRAPHQL_ENDPOINT}
+ARG APP_VERSION
+ENV APP_VERSION=${APP_VERSION}
+ARG REDIS_HOST
+ENV REDIS_HOST=${REDIS_HOST}
+ARG REDIS_PORT
+ENV REDIS_PORT=${REDIS_PORT}
+ARG REDIS_DB
+ENV REDIS_DB=${REDIS_DB}
+ARG REDIS_USER
+ENV REDIS_USER=${REDIS_USER}
+ARG REDIS_PASSWORD
+ENV REDIS_PASSWORD=${REDIS_PASSWORD}
+
 ARG user=habetrot
 ARG home=/home/$user
 ARG group=habetrot
-RUN addgroup $group
-RUN adduser \
+RUN addgroup $group && \
+    adduser \
     --disabled-password \
     --gecos "" \
     --home $home \
     --ingroup $group \
-    $user
-
-RUN mkdir /app && chown $user:$user /app
+    $user && \
+    mkdir /app && \
+    chown $user:$group /app
 
 WORKDIR /app
 
@@ -31,8 +52,9 @@ RUN \
 
 ENV PATH /home/habetrot/.local/bin:$PATH
  
-RUN pipx install poetry && poetry install --no-interaction --no-ansi --only main
+RUN pipx install poetry && \
+    poetry install --no-interaction --no-ansi --only main
 
-EXPOSE 8000
+EXPOSE $APP_PORT
 
 CMD [ "poetry", "run", "start" ]

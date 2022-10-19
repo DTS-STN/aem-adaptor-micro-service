@@ -1,6 +1,7 @@
 import os
-import graphql
 from typing import Any
+
+import graphql
 from gql import Client, gql
 from gql.transport.requests import RequestsHTTPTransport
 

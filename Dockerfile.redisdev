@@ -13,6 +13,11 @@ ARG REDIS_PASSWORD
 ENV REDIS_PASSWORD=$REDIS_PASSWORD
 ARG REDIS_USER_PERMISSIONS
 ENV REDIS_USER_PERMISSIONS=$REDIS_USER_PERMISSIONS
+ARG REDIS_DATA_DIR=/home/habetrot/data
+ENV REDIS_DATA_DIR=$REDIS_DATA_DIR
+ARG user=habetrot
+ARG home=/home/$user
+ARG group=habetrot
 
 COPY redis.conf /usr/local/etc/redis/redis-template.conf
 
@@ -21,18 +26,16 @@ RUN \
     apt install gettext-base && \
     envsubst < /usr/local/etc/redis/redis-template.conf > /usr/local/etc/redis/redis.conf && \
     apt-get remove --purge --auto-remove -y && \
-    rm -rf /var/lib/apt/lists/*
-
-ARG user=habetrot
-ARG home=/home/$user
-ARG group=habetrot
-RUN addgroup $group
-RUN adduser \
+    rm -rf /var/lib/apt/lists/* && \
+    addgroup $group && \
+    adduser \
     --disabled-password \
     --gecos "" \
     --home $home \
     --ingroup $group \
-    $user
+    $user && \
+    mkdir -p /home/$user/data && \
+    chown $user:$group /home/$user/data
 
 USER $user
 
