@@ -1,7 +1,5 @@
 from typing import Any, List
-
 from pydantic import BaseModel
-
 
 class Task(BaseModel):
     title: str
@@ -24,11 +22,11 @@ class ExitBeta(BaseModel):
     title: str
     link: str
 
-
 class HomeContent(BaseModel):
     title: str
     cards: List[Card]
     exitBeta: ExitBeta
+
 
 
 def map_home(aem_content: Any) -> HomeContent:
@@ -48,7 +46,6 @@ def map_home(aem_content: Any) -> HomeContent:
             "exitBeta": exitBeta,
         }
     )
-
     return homeContent
 
 
